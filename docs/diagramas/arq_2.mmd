@@ -1,0 +1,14 @@
+flowchart TB
+    subgraph Domínio["Domínio · src/domain"]
+        SVC["DisposalAssistant<br/>(sem httpx/fastapi/openai/ollama/langchain)"]
+        PORT{{"LLMClient (Protocol)<br/>complete(Prompt) -> Completion<br/>levanta LLMUnavailable"}}
+        SVC --> PORT
+    end
+    subgraph Infra["Infra · src/infra/llm.py · build_llm(env)"]
+        A1["FakeLLM<br/>LLM_PROVIDER=fake<br/>(testes, CI, evals de regressão)"]
+        A2["OllamaLLM<br/>LLM_PROVIDER=ollama<br/>LLM_MODEL=llama3.2:3b | qwen2.5:7b"]
+        A3["OpenAICompatLLM<br/>LLM_PROVIDER=openai_compat<br/>(LM Studio, vLLM, provedor externo)"]
+    end
+    PORT -. implementado por .-> A1
+    PORT -. implementado por .-> A2
+    PORT -. implementado por .-> A3

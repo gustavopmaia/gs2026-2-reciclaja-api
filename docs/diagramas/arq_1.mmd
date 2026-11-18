@@ -1,0 +1,14 @@
+flowchart TB
+    C([Cidadão / app da prefeitura]) -->|POST /v1/ask| API["src/api · FastAPI<br/>validação do contrato: 400 / 422"]
+    API --> GI["Guardrail de entrada · domínio<br/>mascara CPF/telefone/e-mail · bloqueia inseguro/injection"]
+    GI -->|inseguro ou fora do escopo| REF[["mode = refused<br/>(LLM nem é chamado)"]]
+    GI --> KB["Base oficial de orientação · domínio<br/>identifica o material"]
+    KB --> S["DisposalAssistant · domínio"]
+    DS[("data/points.json<br/>fonte sintética")] --> R["JsonPointRepository · infra"]
+    R -->|porta PointRepository<br/>até 3 pontos ABERTOS| S
+    S -->|porta LLMClient<br/>prompt + contexto filtrado| LLM["Adaptador de LLM · infra<br/>FakeLLM | OllamaLLM | OpenAICompatLLM"]
+    LLM -->|falha / timeout 8 s| E503[["503 LLM_UNAVAILABLE<br/>+ Retry-After"]]
+    LLM -->|texto| GO["Guardrail de saída · domínio<br/>IDs existem? citou ponto? sem PII?"]
+    GO -->|aprovado| OK[["mode = llm"]]
+    GO -->|reprovado| FB[["mode = fallback<br/>resposta determinística da base oficial"]]
+    API -.-> OBS[("Logs JSON + métricas Prometheus<br/>latência · erro · recusa · tokens")]
