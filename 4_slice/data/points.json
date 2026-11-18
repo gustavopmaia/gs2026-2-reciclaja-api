@@ -1,0 +1,453 @@
+[
+  {
+    "id": "PC-001",
+    "name": "Ecoponto Mooca 1",
+    "type": "ecoponto",
+    "neighborhood": "Mooca",
+    "address": "Av. das Flores, 646",
+    "latitude": -23.55887,
+    "longitude": -46.59333,
+    "materials": [
+      "entulho",
+      "metal",
+      "papel",
+      "vidro",
+      "volumoso"
+    ],
+    "status": "aberto",
+    "opening_hours": "Ter a Sáb, 9h às 18h",
+    "updated_at": "2026-11-13T18:00:00Z",
+    "data_source": "sintetico"
+  },
+  {
+    "id": "PC-002",
+    "name": "Pev Pinheiros 2",
+    "type": "pev",
+    "neighborhood": "Pinheiros",
+    "address": "Rua das Acácias, 304",
+    "latitude": -23.56066,
+    "longitude": -46.69401,
+    "materials": [
+      "metal",
+      "papel",
+      "plastico",
+      "vidro"
+    ],
+    "status": "aberto",
+    "opening_hours": "Ter a Sáb, 9h às 18h",
+    "updated_at": "2026-11-11T11:00:00Z",
+    "data_source": "sintetico"
+  },
+  {
+    "id": "PC-003",
+    "name": "Cooperativa Tatuapé 3",
+    "type": "cooperativa",
+    "neighborhood": "Tatuapé",
+    "address": "Rua do Comércio, 961",
+    "latitude": -23.54287,
+    "longitude": -46.57847,
+    "materials": [
+      "oleo_cozinha",
+      "plastico"
+    ],
+    "status": "aberto",
+    "opening_hours": "Seg a Sáb, 6h às 22h",
+    "updated_at": "2026-11-12T11:00:00Z",
+    "data_source": "sintetico"
+  },
+  {
+    "id": "PC-004",
+    "name": "Ponto Comercio Lapa 4",
+    "type": "ponto_comercio",
+    "neighborhood": "Lapa",
+    "address": "Rua Projetada, 154",
+    "latitude": -23.51947,
+    "longitude": -46.69992,
+    "materials": [
+      "eletronico",
+      "lampada"
+    ],
+    "status": "aberto",
+    "opening_hours": "Todos os dias, 7h às 19h",
+    "updated_at": "2026-11-01T19:00:00Z",
+    "data_source": "sintetico"
+  },
+  {
+    "id": "PC-005",
+    "name": "Ecoponto Santana 5",
+    "type": "ecoponto",
+    "neighborhood": "Santana",
+    "address": "Rua das Acácias, 445",
+    "latitude": -23.50187,
+    "longitude": -46.62,
+    "materials": [
+      "eletronico",
+      "entulho",
+      "metal",
+      "papel",
+      "plastico",
+      "vidro",
+      "volumoso"
+    ],
+    "status": "fechado",
+    "opening_hours": "Ter a Sáb, 9h às 18h",
+    "updated_at": "2026-11-07T20:00:00Z",
+    "data_source": "sintetico"
+  },
+  {
+    "id": "PC-006",
+    "name": "Pev Vila Mariana 6",
+    "type": "pev",
+    "neighborhood": "Vila Mariana",
+    "address": "Av. das Flores, 239",
+    "latitude": -23.58368,
+    "longitude": -46.62764,
+    "materials": [
+      "metal",
+      "papel",
+      "plastico",
+      "vidro"
+    ],
+    "status": "manutencao",
+    "opening_hours": "Seg a Sáb, 6h às 22h",
+    "updated_at": "2026-11-12T15:00:00Z",
+    "data_source": "sintetico"
+  },
+  {
+    "id": "PC-007",
+    "name": "Cooperativa Itaquera 7",
+    "type": "cooperativa",
+    "neighborhood": "Itaquera",
+    "address": "Av. Central, 880",
+    "latitude": -23.53228,
+    "longitude": -46.45347,
+    "materials": [
+      "oleo_cozinha",
+      "papel",
+      "plastico"
+    ],
+    "status": "lotado",
+    "opening_hours": "Ter a Sáb, 9h às 18h",
+    "updated_at": "2026-11-12T20:00:00Z",
+    "data_source": "sintetico"
+  },
+  {
+    "id": "PC-008",
+    "name": "Ponto Comercio Butantã 8",
+    "type": "ponto_comercio",
+    "neighborhood": "Butantã",
+    "address": "Av. das Flores, 828",
+    "latitude": -23.56806,
+    "longitude": -46.70403,
+    "materials": [
+      "eletronico",
+      "lampada",
+      "oleo_cozinha",
+      "pilha_bateria"
+    ],
+    "status": "aberto",
+    "opening_hours": "Ter a Sáb, 9h às 18h",
+    "updated_at": "2026-11-04T10:00:00Z",
+    "data_source": "sintetico"
+  },
+  {
+    "id": "PC-009",
+    "name": "Ecoponto Mooca 9",
+    "type": "ecoponto",
+    "neighborhood": "Mooca",
+    "address": "Rua do Comércio, 953",
+    "latitude": -23.566,
+    "longitude": -46.59515,
+    "materials": [
+      "eletronico",
+      "metal",
+      "papel",
+      "plastico",
+      "vidro",
+      "volumoso"
+    ],
+    "status": "lotado",
+    "opening_hours": "Ter a Sáb, 9h às 18h",
+    "updated_at": "2026-11-13T12:00:00Z",
+    "data_source": "sintetico"
+  },
+  {
+    "id": "PC-010",
+    "name": "Pev Pinheiros 10",
+    "type": "pev",
+    "neighborhood": "Pinheiros",
+    "address": "Rua das Acácias, 458",
+    "latitude": -23.56321,
+    "longitude": -46.6873,
+    "materials": [
+      "metal",
+      "papel",
+      "plastico",
+      "vidro"
+    ],
+    "status": "manutencao",
+    "opening_hours": "Todos os dias, 7h às 19h",
+    "updated_at": "2026-11-08T20:00:00Z",
+    "data_source": "sintetico"
+  },
+  {
+    "id": "PC-011",
+    "name": "Cooperativa Tatuapé 11",
+    "type": "cooperativa",
+    "neighborhood": "Tatuapé",
+    "address": "Rua Projetada, 972",
+    "latitude": -23.54871,
+    "longitude": -46.58067,
+    "materials": [
+      "metal",
+      "oleo_cozinha"
+    ],
+    "status": "lotado",
+    "opening_hours": "Todos os dias, 7h às 19h",
+    "updated_at": "2026-11-02T09:00:00Z",
+    "data_source": "sintetico"
+  },
+  {
+    "id": "PC-012",
+    "name": "Ponto Comercio Lapa 12",
+    "type": "ponto_comercio",
+    "neighborhood": "Lapa",
+    "address": "Rua das Acácias, 10",
+    "latitude": -23.52798,
+    "longitude": -46.70307,
+    "materials": [
+      "eletronico",
+      "lampada",
+      "oleo_cozinha",
+      "pilha_bateria"
+    ],
+    "status": "aberto",
+    "opening_hours": "Seg a Sex, 8h às 17h",
+    "updated_at": "2026-11-04T07:00:00Z",
+    "data_source": "sintetico"
+  },
+  {
+    "id": "PC-013",
+    "name": "Ecoponto Santana 13",
+    "type": "ecoponto",
+    "neighborhood": "Santana",
+    "address": "Rua da Escola, 607",
+    "latitude": -23.50051,
+    "longitude": -46.61648,
+    "materials": [
+      "eletronico",
+      "entulho",
+      "metal",
+      "papel",
+      "plastico",
+      "vidro",
+      "volumoso"
+    ],
+    "status": "lotado",
+    "opening_hours": "Seg a Sex, 8h às 17h",
+    "updated_at": "2026-11-09T09:00:00Z",
+    "data_source": "sintetico"
+  },
+  {
+    "id": "PC-014",
+    "name": "Pev Vila Mariana 14",
+    "type": "pev",
+    "neighborhood": "Vila Mariana",
+    "address": "Rua das Acácias, 437",
+    "latitude": -23.58563,
+    "longitude": -46.6253,
+    "materials": [
+      "metal",
+      "plastico",
+      "vidro"
+    ],
+    "status": "fechado",
+    "opening_hours": "Todos os dias, 7h às 19h",
+    "updated_at": "2026-11-09T12:00:00Z",
+    "data_source": "sintetico"
+  },
+  {
+    "id": "PC-015",
+    "name": "Cooperativa Itaquera 15",
+    "type": "cooperativa",
+    "neighborhood": "Itaquera",
+    "address": "Rua Projetada, 24",
+    "latitude": -23.53082,
+    "longitude": -46.45821,
+    "materials": [
+      "metal",
+      "papel",
+      "plastico"
+    ],
+    "status": "aberto",
+    "opening_hours": "Seg a Sáb, 6h às 22h",
+    "updated_at": "2026-11-14T11:00:00Z",
+    "data_source": "sintetico"
+  },
+  {
+    "id": "PC-016",
+    "name": "Ponto Comercio Butantã 16",
+    "type": "ponto_comercio",
+    "neighborhood": "Butantã",
+    "address": "Rua do Comércio, 709",
+    "latitude": -23.57493,
+    "longitude": -46.71148,
+    "materials": [
+      "eletronico",
+      "lampada",
+      "oleo_cozinha",
+      "pilha_bateria"
+    ],
+    "status": "aberto",
+    "opening_hours": "Ter a Sáb, 9h às 18h",
+    "updated_at": "2026-11-08T15:00:00Z",
+    "data_source": "sintetico"
+  },
+  {
+    "id": "PC-017",
+    "name": "Ecoponto Mooca 17",
+    "type": "ecoponto",
+    "neighborhood": "Mooca",
+    "address": "Av. das Flores, 248",
+    "latitude": -23.55643,
+    "longitude": -46.60761,
+    "materials": [
+      "eletronico",
+      "entulho",
+      "metal",
+      "papel",
+      "plastico",
+      "vidro",
+      "volumoso"
+    ],
+    "status": "aberto",
+    "opening_hours": "Seg a Sáb, 6h às 22h",
+    "updated_at": "2026-11-04T16:00:00Z",
+    "data_source": "sintetico"
+  },
+  {
+    "id": "PC-018",
+    "name": "Pev Pinheiros 18",
+    "type": "pev",
+    "neighborhood": "Pinheiros",
+    "address": "Av. das Flores, 963",
+    "latitude": -23.56022,
+    "longitude": -46.69396,
+    "materials": [
+      "papel",
+      "vidro"
+    ],
+    "status": "aberto",
+    "opening_hours": "Ter a Sáb, 9h às 18h",
+    "updated_at": "2026-11-12T16:00:00Z",
+    "data_source": "sintetico"
+  },
+  {
+    "id": "PC-019",
+    "name": "Cooperativa Tatuapé 19",
+    "type": "cooperativa",
+    "neighborhood": "Tatuapé",
+    "address": "Av. das Flores, 233",
+    "latitude": -23.53429,
+    "longitude": -46.57566,
+    "materials": [
+      "metal",
+      "plastico"
+    ],
+    "status": "aberto",
+    "opening_hours": "Seg a Sex, 8h às 17h",
+    "updated_at": "2026-11-11T19:00:00Z",
+    "data_source": "sintetico"
+  },
+  {
+    "id": "PC-020",
+    "name": "Ponto Comercio Lapa 20",
+    "type": "ponto_comercio",
+    "neighborhood": "Lapa",
+    "address": "Rua Projetada, 555",
+    "latitude": -23.52872,
+    "longitude": -46.71243,
+    "materials": [
+      "lampada",
+      "oleo_cozinha"
+    ],
+    "status": "aberto",
+    "opening_hours": "Seg a Sex, 8h às 17h",
+    "updated_at": "2026-11-06T08:00:00Z",
+    "data_source": "sintetico"
+  },
+  {
+    "id": "PC-021",
+    "name": "Ecoponto Santana 21",
+    "type": "ecoponto",
+    "neighborhood": "Santana",
+    "address": "Rua do Comércio, 541",
+    "latitude": -23.50236,
+    "longitude": -46.6326,
+    "materials": [
+      "eletronico",
+      "entulho",
+      "metal",
+      "papel",
+      "plastico",
+      "vidro"
+    ],
+    "status": "manutencao",
+    "opening_hours": "Todos os dias, 7h às 19h",
+    "updated_at": "2026-11-14T07:00:00Z",
+    "data_source": "sintetico"
+  },
+  {
+    "id": "PC-022",
+    "name": "Pev Vila Mariana 22",
+    "type": "pev",
+    "neighborhood": "Vila Mariana",
+    "address": "Rua das Acácias, 909",
+    "latitude": -23.58992,
+    "longitude": -46.63739,
+    "materials": [
+      "papel",
+      "plastico"
+    ],
+    "status": "manutencao",
+    "opening_hours": "Seg a Sex, 8h às 17h",
+    "updated_at": "2026-11-01T11:00:00Z",
+    "data_source": "sintetico"
+  },
+  {
+    "id": "PC-023",
+    "name": "Cooperativa Itaquera 23",
+    "type": "cooperativa",
+    "neighborhood": "Itaquera",
+    "address": "Rua da Escola, 596",
+    "latitude": -23.53416,
+    "longitude": -46.46167,
+    "materials": [
+      "metal",
+      "oleo_cozinha"
+    ],
+    "status": "fechado",
+    "opening_hours": "Todos os dias, 7h às 19h",
+    "updated_at": "2026-11-09T18:00:00Z",
+    "data_source": "sintetico"
+  },
+  {
+    "id": "PC-024",
+    "name": "Ponto Comercio Butantã 24",
+    "type": "ponto_comercio",
+    "neighborhood": "Butantã",
+    "address": "Rua da Escola, 579",
+    "latitude": -23.57835,
+    "longitude": -46.70237,
+    "materials": [
+      "eletronico",
+      "lampada",
+      "oleo_cozinha",
+      "pilha_bateria"
+    ],
+    "status": "aberto",
+    "opening_hours": "Ter a Sáb, 9h às 18h",
+    "updated_at": "2026-11-03T07:00:00Z",
+    "data_source": "sintetico"
+  }
+]
