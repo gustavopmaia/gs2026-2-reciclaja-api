@@ -40,10 +40,9 @@ jobs:
       - name: Evals de regressão (fake determinístico)
         run: python evals/run_evals.py
 
-      - name: Scan de segredos (RNF-04)
-        uses: gitleaks/gitleaks-action@v2
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Scan de segredos em todo o histórico (RNF-04)
+        working-directory: .
+        run: docker run --rm -v "$PWD:/repo" zricethezav/gitleaks:v8.24.3 git /repo --redact -v
 
   docker:
     name: Docker Compose sobe e responde
