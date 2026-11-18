@@ -1,0 +1,35 @@
+GS2026.2 — Prompt and Artificial Intelligence — Engenharia de Software
+Turma: 2CCPY-2026 | Modalidade: TRIO | Grupo: ReciclaJá | Frente C — Descarte e sustentabilidade
+Professor: Jorge Luiz Gomes
+
+INTEGRANTES
+- Gabriel Fidalgo .... RM563213
+- Gustavo Maia ....... RM562240
+- Gustavo Rossi ...... RM566075
+
+LINKS
+- Repositório ........ https://github.com/gustavopmaia/gs2026-2-reciclaja-api
+- CI verde (run) ..... https://github.com/gustavopmaia/gs2026-2-reciclaja-api/actions/runs/44362242694
+- Vídeo .............. ver 7_demo_video_url.txt
+
+COLA COMPACTA (o que entregamos e onde provar)
+- Problema: cidadão não sabe onde/como descartar resíduo especial -> vai pro lixo comum/pia/rua.
+- Persona: Dona Cida, 58, Mooca. Secundária: gestor de cooperativa (consome GET /v1/points).
+- Contrato: OpenAPI 3.1.0, 4 endpoints (GET /v1/points, GET /v1/points/{id}, POST /v1/ask, GET /v1/health),
+  erro único 400/404/422/503, paginação limit/offset/next. Validado: openapi-spec-validator -> OK.
+- Arquitetura: portas/adaptadores. src/domain não importa LLM/HTTP (teste AST garante).
+  Trocar modelo = LLM_PROVIDER/LLM_MODEL no .env (fake | ollama | openai_compat).
+- ADRs (4): porta própria x LangChain | grounding filtrado x RAG vetorial | Ollama local x API externa |
+  fallback determinístico x recusa/erro/retry.
+- Slice: FastAPI, 38 testes (feliz, erro, contrato schema x resposta, fake do LLM), cobertura 96%,
+  CI: ruff + validador + pytest + evals + gitleaks + docker compose. Docker Compose com Prometheus.
+- Evals: 30 casos (18 felizes, 4 borda, 2 fora do escopo, 6 guardrail).
+  llama3.2:3b prompt v1 = 46,7% (bloqueado) -> prompt v2 + guardrail G1b = 100% correta,
+  guardrail 100%, fallback 31,8% -> liberado só para PILOTO. qwen2.5:7b = 93,3%, p95 14 s -> bloqueado.
+- Guardrails: G1 não inventar ponto | G1b não negar ponto existente | G2 mascarar CPF/telefone/e-mail |
+  G3 recusar descarte ilegal e prompt injection | G4 recusar fora do escopo sem chamar LLM.
+- Rollout: interno -> piloto (Mooca, ~5%) -> público (fallback <= 20%, 0 incidente PII, 2 semanas).
+
+DECLARAÇÃO
+Declaramos que o trabalho é de autoria do grupo. O uso de ferramentas de IA está registrado em 9_Chat_Log.txt.
+Nenhuma chave de API ou .env real foi incluída. Os dados de pontos de coleta são sintéticos.

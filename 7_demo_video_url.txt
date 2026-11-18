@@ -1,0 +1,4 @@
+Vídeo de demonstração (≤ 3 min, YouTube não listado):
+<COLAR_LINK_DO_YOUTUBE_AQUI>
+
+Roteiro: docs/ROTEIRO_VIDEO.md

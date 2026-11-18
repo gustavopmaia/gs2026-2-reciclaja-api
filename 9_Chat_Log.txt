@@ -1,0 +1,98 @@
+9_Chat_Log.txt — Registro do uso de IA
+GS2026.2 · Prompt and Artificial Intelligence · 2CCPY · Grupo ReciclaJá
+Gabriel Fidalgo (RM563213) · Gustavo Maia (RM562240) · Gustavo Rossi (RM566075)
+
+======================================================================
+RESUMO
+======================================================================
+Usamos IA (assistente de chat) como apoio pontual em 5 momentos, listados abaixo.
+O escopo, a persona, os requisitos, o desenho de portas/adaptadores, as ADRs,
+os guardrails e o critério de rollout foram decididos pelo grupo em reunião.
+O código do domínio e os testes foram escritos e revisados por nós.
+Todo trecho sugerido pela IA foi lido, executado e só entrou se o grupo soube explicar.
+Regra do grupo: nada gerado pela IA entra sem passar no pytest/CI e sem um segundo integrante revisar.
+
+----------------------------------------------------------------------
+[1] Rascunho do contrato OpenAPI (2_contrato_api.yaml)
+Responsável: Gustavo Maia · Revisão: Gabriel Fidalgo
+----------------------------------------------------------------------
+PROMPT:
+"Tenho estes endpoints: GET /v1/points (filtros material, bairro, status,
+limit/offset), GET /v1/points/{id}, POST /v1/ask. Gere um esqueleto OpenAPI 3.1
+com um schema de erro único para 400/404/422/503 e paginação com campo next."
+
+O QUE APROVEITAMOS:
+- Estrutura de components/responses reutilizáveis (BadRequest, NotFound...).
+- Uso de type: [string, 'null'] do OpenAPI 3.1.
+
+O QUE DESCARTAMOS / MUDAMOS:
+- A IA sugeriu "status: string" livre: trocamos por enum (aberto, lotado, manutencao, fechado).
+- A IA misturava 400 e 422 para tudo: definimos a regra (path/query/JSON quebrado = 400,
+  corpo bem formado mas inválido = 422) e documentamos no info.description.
+- Acrescentamos sozinhos: campo mode (llm/fallback/refused), refusal_reason, disclaimer,
+  data_source e Retry-After no 503.
+
+COMO VALIDAMOS: openapi-spec-validator (OK) + teste test_contrato_openapi_valido +
+assert_contract validando as respostas reais contra o YAML.
+
+----------------------------------------------------------------------
+[2] Revisão dos critérios de aceite (1_visao_produto.md)
+Responsável: Gustavo Rossi · Revisão: Gustavo Maia
+----------------------------------------------------------------------
+PROMPT:
+"Revise estes critérios Dado/Quando/Então e aponte furos: o que não é testável,
+o que está ambíguo e que caso de erro está faltando."
+
+RETORNO ÚTIL:
+- Apontou que "a resposta deve ser boa" não era testável -> reescrevemos o CA-04
+  com material esperado e IDs exatos (PC-008, PC-016, PC-024).
+- Apontou que faltava o caso do LLM fora do ar -> criamos o CA-07 (503 + Retry-After).
+
+DESCARTADO:
+- Sugestão de critério de "satisfação do usuário ≥ 4/5": não mensurável no slice, ficou fora.
+
+----------------------------------------------------------------------
+[3] Variações de perguntas para o conjunto de evals (evals/cases.json)
+Responsável: Gabriel Fidalgo · Revisão: Gustavo Rossi
+----------------------------------------------------------------------
+PROMPT:
+"Liste 15 jeitos diferentes, em português coloquial, de um morador perguntar
+como descartar: pilha, óleo, lâmpada, eletrônico, entulho e móveis."
+
+O QUE APROVEITAMOS: algumas formulações coloquiais (E11 "bateria de notebook estufada",
+E14 "onde levar oleo de fritura", E18 "sobrou tijolo quebrado da obra").
+O QUE FOI NOSSO: os casos de borda e de guardrail (E19–E30), o critério de aprovação
+de cada caso e as metas numéricas.
+
+----------------------------------------------------------------------
+[4] Explicação de erro no CI (GitHub Actions)
+Responsável: Gustavo Maia
+----------------------------------------------------------------------
+CONTEXTO: o primeiro run falhou no passo do gitleaks com
+"fatal: ambiguous argument '6c7a926...^..0c9164b': unknown revision".
+
+PROMPT: "Por que o gitleaks-action falha no primeiro push de um repositório novo?"
+
+RETORNO: o action monta o intervalo de commits como <primeiro>^..<último>, e o
+primeiro commit do repositório não tem pai.
+DECISÃO DO GRUPO: trocar o action pela CLI do gitleaks varrendo o histórico inteiro
+(commit "CI: gitleaks via CLI varrendo todo o historico"). Run seguinte: verde.
+
+----------------------------------------------------------------------
+[5] Formatação do README e dos diagramas
+Responsável: Gustavo Rossi
+----------------------------------------------------------------------
+PROMPT: "Converta este desenho de fluxo em Mermaid (flowchart TB) e sugira
+uma tabela de índice para o README."
+VALIDAÇÃO: renderizamos o Mermaid e corrigimos títulos sobrepostos e setas;
+o conteúdo das tabelas é nosso.
+
+======================================================================
+O QUE A IA NÃO FEZ / NÃO DECIDE
+======================================================================
+- Não escolheu a frente, a persona nem os RNFs (números definidos pelo grupo e MEDIDOS).
+- Não escreveu as ADRs: as opções, a decisão e o custo de cada uma foram discutidos pelo grupo.
+- Não gerou números de resultado: todos os números de eval, cobertura, latência e
+  CI saíram de execução real (relatórios em 4_slice/evals/report_*.json e prints do Actions).
+- Nenhum dado pessoal real foi enviado a ferramenta de IA.
+- Dentro do produto, o LLM nunca decide sozinho: guardrails no domínio validam toda resposta.
