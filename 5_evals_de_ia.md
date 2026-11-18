@@ -59,10 +59,10 @@ Relatórios completos com cada resposta: `4_slice/evals/report_*.json`.
 |---|---|---|---|---|---|---|
 | `fake-deterministic-v1` (CI) | 100% | 100% | 0% | ~0 s | 2.171 | Gate de regressão de **código** ✅ |
 | `llama3.2:3b` + **prompt v1** | **46,7%** | 83,3% | 4,5% | 3,04 s | 8.637 | **Bloqueado** ❌ |
-| `llama3.2:3b` + **prompt v2 + G1b** | **100%** | **100%** | **31,8%** | 3,78 s ¹ | 10.387 | **Piloto** ✅ / público ❌ |
+| `llama3.2:3b` + **prompt v2 + G1b** | **100%** | **100%** | **31,8%** | 3,73 s ¹ | 10.387 | **Piloto** ✅ / público ❌ |
 | `qwen2.5:7b` + prompt v2 + G1b | 93,3% | 83,3% | 9,1% | 14,4 s ² | 10.473 | **Bloqueado** ❌ |
 
-¹ Máquina sem carga. Na mesma máquina rodando o build do app Android em paralelo, o p95 foi para 6,96 s e o gate barrou, como esperado: a latência depende do hardware do servidor de modelo, e por isso o critério é medido no ambiente de destino.
+¹ Medido com o modelo já carregado e sem build paralelo (`report_ollama_llama3.2-3b.json`). Numa execução anterior, com o build do app Android rodando na mesma máquina, o p95 foi para 6,96 s e o gate barrou, como esperado: a latência depende do hardware do servidor de modelo, e por isso o critério de rollout é medido no ambiente de destino.
 ² Notebook sem GPU dedicada. O 7B é mais preciso que o 3B no texto, mas inviável no RNF-01 sem GPU.
 
 **O que aprendemos com o v1:** o modelo de 3B (1) respondia **"não há ponto cadastrado"** mesmo com 3 pontos no contexto (E04, E29), o que é alucinação por omissão, e (2) omitia o cuidado de preparo (por exemplo, não dizia para embalar a lâmpada). Fizemos duas mudanças, as duas versionadas:

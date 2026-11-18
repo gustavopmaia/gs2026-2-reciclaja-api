@@ -61,7 +61,7 @@ CARDS = {
 <h2>O gate decide quem vai pra produção</h2>
 <table><tr><th>Candidato</th><th>Resposta correta</th><th>Guardrail</th><th>Fallback</th><th>p95</th><th>Veredito</th></tr>
 <tr><td>llama3.2:3b · prompt v1</td><td class="no">46,7%</td><td class="no">83,3%</td><td>4,5%</td><td>3,0 s</td><td class="no">Bloqueado</td></tr>
-<tr><td>llama3.2:3b · prompt v2 + G1b</td><td class="ok">100%</td><td class="ok">100%</td><td class="mid">31,8%</td><td>3,8 s</td><td class="mid">Só piloto</td></tr>
+<tr><td>llama3.2:3b · prompt v2 + G1b</td><td class="ok">100%</td><td class="ok">100%</td><td class="mid">31,8%</td><td>3,7 s</td><td class="mid">Só piloto</td></tr>
 <tr><td>qwen2.5:7b · prompt v2</td><td>93,3%</td><td class="no">83,3%</td><td>9,1%</td><td class="no">14,4 s</td><td class="no">Bloqueado</td></tr></table>
 <p style="margin-top:40px">Metas: correta ≥ 90% · guardrail 100% · p95 ≤ 4 s · público exige fallback ≤ 20%</p>{FOOT}""",
 "07_fim": f"""<span class="tag">Como entregamos para a prefeitura e dormimos tranquilos</span>

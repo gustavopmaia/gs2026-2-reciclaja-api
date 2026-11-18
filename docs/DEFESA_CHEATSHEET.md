@@ -17,7 +17,7 @@ Nada no domínio. `src/domain` só conhece a porta `LLMClient.complete(Prompt) -
 **"Por que fallback e não recusa ou retry?" (ADR-04)** O cidadão sempre recebe a orientação oficial. Retry dobra a latência e, com temperature 0, repete o erro. Custo: texto menos natural, vigiado pela meta fallback ≤ 20%.
 
 **Números (todos medidos, não inventados)**
-38 testes · cobertura 96% · CI verde (ruff, validador, pytest, evals, gitleaks, docker) · GET p95 0,8 ms · eval: v1 46,7% → v2 100% correta, guardrail 100%, fallback 31,8%, p95 3,8 s · qwen 7B 93,3%, p95 14 s.
+38 testes · cobertura 96% · CI verde (ruff, validador, pytest, evals, gitleaks, docker) · GET p95 0,8 ms · eval: v1 46,7% → v2 100% correta, guardrail 100%, fallback 31,8%, p95 3,7 s · qwen 7B 93,3%, p95 14 s.
 
 **400 × 422?** 400 = requisição malformada (JSON quebrado, path/query inválido). 422 = JSON bem formado que viola o schema do corpo.
 

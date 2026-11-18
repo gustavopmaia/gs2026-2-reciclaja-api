@@ -47,7 +47,7 @@ A Secretaria de Meio Ambiente tem um piloto de assistente de descarte que roda n
 
 | ID | Atributo | Meta | Como medimos | Resultado atual |
 |---|---|---|---|---|
-| **RNF-01** | Desempenho | **p95 de `GET /v1/points/{id}` ≤ 200 ms** e **p95 de `POST /v1/ask` ≤ 4 s** com LLM real carregado | `scripts/bench.py` (300 req.) + histograma `reciclaja_http_request_seconds` no Prometheus + `latencia_p95_s` do eval | GET p95 = **0,8 ms** (Docker, fake). Ask com llama3.2:3b: p95 = **3,78 s** em máquina dedicada. Com a máquina sob carga, p95 subiu para 6,96 s e o gate barrou (ver `5_evals_de_ia.md`). |
+| **RNF-01** | Desempenho | **p95 de `GET /v1/points/{id}` ≤ 200 ms** e **p95 de `POST /v1/ask` ≤ 4 s** com LLM real carregado | `scripts/bench.py` (300 req.) + histograma `reciclaja_http_request_seconds` no Prometheus + `latencia_p95_s` do eval | GET p95 = **0,8 ms** (Docker, fake). Ask com llama3.2:3b: p95 = **3,73 s** (modelo carregado, sem carga paralela). Sob carga (build Android em paralelo) foi a 6,96 s e o gate barrou — ver `5_evals_de_ia.md`. |
 | **RNF-02** | Testabilidade | **Cobertura ≥ 80%**: o CI falha abaixo disso | `pytest --cov --cov-fail-under=80` no GitHub Actions | **96%** (38 testes) |
 | **RNF-03** | Disponibilidade / degradação | **99% em horário comercial (7h–19h)**. Com o LLM fora, `/v1/ask` responde **503 em ≤ 8 s** (timeout) e `/v1/points` continua **100%** disponível | Alerta `TaxaErro5xxAlta` (> 5% em 5 min) + teste `test_ask_llm_indisponivel_retorna_503` | Testado com o adaptador derrubado |
 | **RNF-04** | Segurança | **0 chaves/segredos no repositório**. Chave de LLM só por variável de ambiente | Gitleaks no CI + `.env` no `.gitignore` + regras `ruff S` (bandit) | CI verde |
