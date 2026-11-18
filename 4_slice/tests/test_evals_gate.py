@@ -1,5 +1,6 @@
 """Gate de regressão no CI: o conjunto de avaliação roda com o fake e precisa bater as metas."""
 
+import os
 import subprocess
 import sys
 from pathlib import Path
@@ -12,7 +13,7 @@ def test_evals_com_fake_aprovam_todas_as_metas(tmp_path):
         [sys.executable, str(ROOT / "evals" / "run_evals.py")],
         capture_output=True,
         text=True,
-        env={"LLM_PROVIDER": "fake", "PATH": ""},
+        env={**os.environ, "LLM_PROVIDER": "fake"},
         check=False,
     )
     assert result.returncode == 0, result.stdout[-2000:]

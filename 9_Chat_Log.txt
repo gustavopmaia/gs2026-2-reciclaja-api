@@ -6,9 +6,9 @@ Gabriel Fidalgo (RM563213) · Gustavo Maia (RM562240) · Gustavo Rossi (RM566075
 RESUMO
 ======================================================================
 Usamos IA (assistente de chat) como apoio pontual em 5 momentos, listados abaixo.
-O escopo, a persona, os requisitos, o desenho de portas/adaptadores, as ADRs,
-os guardrails e o critério de rollout foram decididos pelo grupo em reunião.
-O código do domínio e os testes foram escritos e revisados por nós.
+O escopo, a persona, os requisitos, o desenho de portas/adaptadores, as decisões
+das ADRs, os guardrails e o critério de rollout foram definidos pelo grupo em reunião.
+O código foi revisado linha a linha pelo grupo; onde a IA ajudou, está registrado abaixo.
 Todo trecho sugerido pela IA foi lido, executado e só entrou se o grupo soube explicar.
 Regra do grupo: nada gerado pela IA entra sem passar no pytest/CI e sem um segundo integrante revisar.
 
@@ -90,8 +90,9 @@ o conteúdo das tabelas é nosso.
 ======================================================================
 O QUE A IA NÃO FEZ / NÃO DECIDE
 ======================================================================
-- Não escolheu a frente, a persona nem os RNFs (números definidos pelo grupo e MEDIDOS).
-- Não escreveu as ADRs: as opções, a decisão e o custo de cada uma foram discutidos pelo grupo.
+- Não escolheu a frente, a persona nem as metas dos RNFs (definidas pelo grupo e MEDIDAS).
+- Não decidiu as ADRs: as opções, a escolha e o custo de cada uma foram discutidos pelo grupo
+  (a IA foi usada só para revisar a redação de alguns trechos).
 - Não gerou números de resultado: todos os números de eval, cobertura, latência e
   CI saíram de execução real (relatórios em 4_slice/evals/report_*.json e prints do Actions).
 - Nenhum dado pessoal real foi enviado a ferramenta de IA.
