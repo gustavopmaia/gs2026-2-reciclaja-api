@@ -1,0 +1,32 @@
+groups:
+  - name: reciclaja
+    rules:
+      - alert: AskLatenciaP95Alta
+        expr: histogram_quantile(0.95, sum(rate(reciclaja_http_request_seconds_bucket{route="/v1/ask"}[5m])) by (le)) > 4
+        for: 10m
+        labels: {severity: warning}
+        annotations:
+          summary: "p95 do /v1/ask acima de 4 s por 10 min (RNF-01)"
+      - alert: TaxaErro5xxAlta
+        expr: sum(rate(reciclaja_http_requests_total{status=~"5.."}[5m])) / sum(rate(reciclaja_http_requests_total[5m])) > 0.05
+        for: 5m
+        labels: {severity: critical}
+        annotations:
+          summary: "Mais de 5% das requisições com erro 5xx (inclui 503 do LLM)"
+      - alert: FallbackGuardrailAlto
+        expr: sum(rate(reciclaja_ask_outcomes_total{mode="fallback"}[1h])) / sum(rate(reciclaja_ask_outcomes_total{mode=~"llm|fallback"}[1h])) > 0.20
+        for: 30m
+        labels: {severity: warning}
+        annotations:
+          summary: "Modelo reprovado pelo guardrail em mais de 20% das respostas (meta de eval)"
+      - alert: RecusaForaDoPadrao
+        expr: sum(rate(reciclaja_ask_outcomes_total{mode="refused"}[1h])) / sum(rate(reciclaja_ask_outcomes_total[1h])) > 0.40
+        for: 1h
+        labels: {severity: info}
+        annotations:
+          summary: "Taxa de recusa acima de 40%: cidadão pode estar perguntando algo que não cobrimos"
+      - alert: ConsumoTokensAlto
+        expr: sum(increase(reciclaja_llm_tokens_total[1d])) > 2000000
+        labels: {severity: warning}
+        annotations:
+          summary: "Mais de 2 milhões de tokens/dia: revisar custo antes da fatura"
