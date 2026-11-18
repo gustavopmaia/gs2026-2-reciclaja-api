@@ -1,0 +1,4 @@
+video/build/
+video/raw/
+video/*.mp4
+video/audio.*
