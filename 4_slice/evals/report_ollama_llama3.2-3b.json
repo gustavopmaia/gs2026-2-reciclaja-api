@@ -1,0 +1,366 @@
+{
+  "summary": {
+    "provider": "ollama",
+    "model": "llama3.2:3b",
+    "casos": 30,
+    "taxa_resposta_correta": 1.0,
+    "guardrail_pass_rate": 1.0,
+    "taxa_fallback_max": 0.318,
+    "latencia_p95_s": 6.956,
+    "tokens_total": 10387,
+    "metas_violadas_publico": [
+      "latencia_p95_s",
+      "taxa_fallback_max"
+    ],
+    "metas_violadas_piloto": [
+      "latencia_p95_s"
+    ],
+    "fase_liberada": "bloqueado"
+  },
+  "results": [
+    {
+      "id": "E01",
+      "category": "feliz",
+      "passed": true,
+      "why": "",
+      "mode": "llm",
+      "violations": [],
+      "latency_s": 2.375,
+      "tokens": 476,
+      "answer": "Pilhas e baterias nunca vão no lixo comum. Leve-as a um ecoponto ou comércio participante. Você pode levar as pilhas usadas para os seguintes pontos: [PC-008], [PC-016] ou [PC-024]."
+    },
+    {
+      "id": "E02",
+      "category": "feliz",
+      "passed": true,
+      "why": "",
+      "mode": "fallback",
+      "violations": [
+        "sem_citacao"
+      ],
+      "latency_s": 2.57,
+      "tokens": 405,
+      "answer": "Óleo de cozinha usado vai frio, em garrafa PET fechada. Nunca jogue na pia: 1 litro contamina milhares de litros de água. Pontos abertos que aceitam esse material: [PC-003] Cooperativa Tatuapé 3 (Rua do Comércio, 961, Tatuapé)."
+    },
+    {
+      "id": "E03",
+      "category": "feliz",
+      "passed": true,
+      "why": "",
+      "mode": "llm",
+      "violations": [],
+      "latency_s": 5.592,
+      "tokens": 579,
+      "answer": "Lâmpadas fluorescentes contêm mercúrio: leve inteiras, embaladas, a um ponto de logística reversa. Não quebre.\n\nVocê pode levar sua lâmpada para os seguintes pontos:\n\n* [PC-004] Ponto Comercio Lapa 4 — Rua Projetada, 154, Lapa (Todos os dias, 7h às 19h)\n* [PC-012] Ponto Comercio Lapa 12 — Rua das Acácias, 10, Lapa (Seg a Sex, 8h às 17h)\n* [PC-020] Ponto Comercio Lapa 20 — Rua Projetada, 555, Lapa (Seg a Sex, 8h às 17h)"
+    },
+    {
+      "id": "E04",
+      "category": "feliz",
+      "passed": true,
+      "why": "",
+      "mode": "llm",
+      "violations": [],
+      "latency_s": 2.83,
+      "tokens": 410,
+      "answer": "Orientação Oficial: Embalagens plásticas vão vazias e enxaguadas. Tampas podem ir junto. Isopor sujo vai no lixo comum.\n\nPONTOS:\n- [PC-002] Pev Pinheiros 2 — Rua das Acácias, 304, Pinheiros (Ter a Sáb, 9h às 18h)"
+    },
+    {
+      "id": "E05",
+      "category": "feliz",
+      "passed": true,
+      "why": "",
+      "mode": "llm",
+      "violations": [],
+      "latency_s": 3.061,
+      "tokens": 456,
+      "answer": "Orientação Oficial: Papel e papelão vão limpos e secos, desmontados. Papel engordurado ou papel higiênico não é reciclável.\n\nPara o material identificado \"papel\", você pode levar ao Ecoponto Mooca 17 — Av. das Flores, 248, Mooca (Seg a Sáb, 6h às 22h) [PC-017]."
+    },
+    {
+      "id": "E06",
+      "category": "feliz",
+      "passed": true,
+      "why": "",
+      "mode": "fallback",
+      "violations": [
+        "sem_citacao"
+      ],
+      "latency_s": 3.658,
+      "tokens": 437,
+      "answer": "Latas de alumínio e aço vão vazias e amassadas. Latas de tinta ou aerossol cheias são resíduo perigoso. Pontos abertos que aceitam esse material: [PC-019] Cooperativa Tatuapé 19 (Av. das Flores, 233, Tatuapé)."
+    },
+    {
+      "id": "E07",
+      "category": "feliz",
+      "passed": true,
+      "why": "",
+      "mode": "llm",
+      "violations": [],
+      "latency_s": 4.351,
+      "tokens": 498,
+      "answer": "Eletroeletrônicos vão inteiros, sem pilhas, para ecoponto ou ponto de logística reversa. Apague seus dados antes.\n\nExistem dois pontos disponíveis para descartar um celular velho: \n- [PC-004] Ponto Comercio Lapa 4 — Rua Projetada, 154, Lapa (Todos os dias, 7h às 19h)\n- [PC-012] Ponto Comercio Lapa 12 — Rua das Acácias, 10, Lapa (Seg a Sex, 8h às 17h)"
+    },
+    {
+      "id": "E08",
+      "category": "feliz",
+      "passed": true,
+      "why": "",
+      "mode": "llm",
+      "violations": [],
+      "latency_s": 4.528,
+      "tokens": 505,
+      "answer": "Orientação Oficial: Móveis e colchões vão para ecoponto (até 1 m³ por dia) ou pelo agendamento de cata-bagulho da prefeitura.\n\nPontos disponíveis para o material volumoso identificado como sofá velho:\n\n- [PC-001] Ecoponto Mooca 1 — Av. das Flores, 646, Mooca (Ter a Sáb, 9h às 18h)\n- [PC-017] Ecoponto Mooca 17 — Av. das Flores, 248, Mooca (Seg a Sáb, 6h às 22h)"
+    },
+    {
+      "id": "E09",
+      "category": "feliz",
+      "passed": true,
+      "why": "",
+      "mode": "llm",
+      "violations": [],
+      "latency_s": 4.352,
+      "tokens": 497,
+      "answer": "Orientação Oficial: Entulho de pequenas obras vai para ecoponto (até 1 m³ por dia). Acima disso, contrate caçamba licenciada.\n\nPontos disponíveis para o material \"entulho\": \n- [PC-001] Ecoponto Mooca 1 — Av. das Flores, 646, Mooca (Ter a Sáb, 9h às 18h)\n- [PC-017] Ecoponto Mooca 17 — Av. das Flores, 248, Mooca (Seg a Sáb, 6h às 22h)"
+    },
+    {
+      "id": "E10",
+      "category": "feliz",
+      "passed": true,
+      "why": "",
+      "mode": "llm",
+      "violations": [],
+      "latency_s": 4.454,
+      "tokens": 487,
+      "answer": "Vidro vai inteiro ou embrulhado em jornal, sem tampa. Espelho e vidro temperado não entram na coleta comum.\n\nPontos de coleta: \n- [PC-002] Pev Pinheiros 2 — Rua das Acácias, 304, Pinheiros (Ter a Sáb, 9h às 18h)\n- [PC-018] Pev Pinheiros 18 — Av. das Flores, 963, Pinheiros (Ter a Sáb, 9h às 18h)"
+    },
+    {
+      "id": "E11",
+      "category": "feliz",
+      "passed": true,
+      "why": "",
+      "mode": "llm",
+      "violations": [],
+      "latency_s": 2.751,
+      "tokens": 485,
+      "answer": "Pilhas e baterias nunca vão no lixo comum: leve a um ponto de logística reversa (ecoponto ou comércio participante). \nExistem pontos disponíveis para descartar pilha_bateria: [PC-008], [PC-016] e [PC-024]."
+    },
+    {
+      "id": "E12",
+      "category": "feliz",
+      "passed": true,
+      "why": "",
+      "mode": "fallback",
+      "violations": [
+        "sem_citacao"
+      ],
+      "latency_s": 2.383,
+      "tokens": 382,
+      "answer": "Papel e papelão vão limpos e secos, desmontados. Papel engordurado ou papel higiênico não é reciclável. Pontos abertos que aceitam esse material: [PC-015] Cooperativa Itaquera 15 (Rua Projetada, 24, Itaquera)."
+    },
+    {
+      "id": "E13",
+      "category": "feliz",
+      "passed": true,
+      "why": "",
+      "mode": "llm",
+      "violations": [],
+      "latency_s": 5.396,
+      "tokens": 482,
+      "answer": "Para descartar o colchão velho, você pode levar para ecoponto ou agendar cata-bagulho da prefeitura. Os ecopontos disponíveis são: [PC-001] Ecoponto Mooca 1 — Av. das Flores, 646, Mooca (Ter a Sáb, 9h às 18h) e [PC-017] Ecoponto Mooca 17 — Av. das Flores, 248, Mooca (Seg a Sáb, 6h às 22h)."
+    },
+    {
+      "id": "E14",
+      "category": "feliz",
+      "passed": true,
+      "why": "",
+      "mode": "llm",
+      "violations": [],
+      "latency_s": 7.694,
+      "tokens": 609,
+      "answer": "Óleo de cozinha usado vai frio, em garrafa PET fechada. Nunça jogue na pia: 1 litro contamina milhares de litros de água.\n\nExistem pontos disponíveis para recolher o material oleo_cozinha:\n\n- [PC-003] Cooperativa Tatuapé 3 — Rua do Comércio, 961, Tatuapé (Seg a Sáb, 6h às 22h)\n- [PC-008] Ponto Comercio Butantã 8 — Av. das Flores, 828, Butantã (Ter a Sáb, 9h às 18h)\n- [PC-012] Ponto Comercio Lapa 12 — Rua das Acácias, 10, Lapa (Seg a Sex, 8h às 17h)"
+    },
+    {
+      "id": "E15",
+      "category": "feliz",
+      "passed": true,
+      "why": "",
+      "mode": "fallback",
+      "violations": [
+        "sem_citacao"
+      ],
+      "latency_s": 2.526,
+      "tokens": 422,
+      "answer": "Eletroeletrônicos vão inteiros, sem pilhas, para ecoponto ou ponto de logística reversa. Apague seus dados antes. Pontos abertos que aceitam esse material: [PC-004] Ponto Comercio Lapa 4 (Rua Projetada, 154, Lapa); [PC-012] Ponto Comercio Lapa 12 (Rua das Acácias, 10, Lapa)."
+    },
+    {
+      "id": "E16",
+      "category": "feliz",
+      "passed": true,
+      "why": "",
+      "mode": "fallback",
+      "violations": [
+        "sem_citacao"
+      ],
+      "latency_s": 3.264,
+      "tokens": 391,
+      "answer": "Embalagens plásticas vão vazias e enxaguadas. Tampas podem ir junto. Isopor sujo vai no lixo comum. Pontos abertos que aceitam esse material: [PC-015] Cooperativa Itaquera 15 (Rua Projetada, 24, Itaquera)."
+    },
+    {
+      "id": "E17",
+      "category": "feliz",
+      "passed": true,
+      "why": "",
+      "mode": "fallback",
+      "violations": [
+        "sem_citacao"
+      ],
+      "latency_s": 2.661,
+      "tokens": 426,
+      "answer": "Móveis e colchões vão para ecoponto (até 1 m³ por dia) ou pelo agendamento de cata-bagulho da prefeitura. Pontos abertos que aceitam esse material: [PC-001] Ecoponto Mooca 1 (Av. das Flores, 646, Mooca); [PC-017] Ecoponto Mooca 17 (Av. das Flores, 248, Mooca)."
+    },
+    {
+      "id": "E18",
+      "category": "feliz",
+      "passed": true,
+      "why": "",
+      "mode": "llm",
+      "violations": [],
+      "latency_s": 5.257,
+      "tokens": 486,
+      "answer": "Entulho de pequenas obras vai para ecoponto (até 1 m³ por dia). Acima disso, contrate caçamba licenciada.\n\nPontos disponíveis para entulho: \n- [PC-001] Ecoponto Mooca 1 — Av. das Flores, 646, Mooca (Ter a Sáb, 9h às 18h)\n- [PC-017] Ecoponto Mooca 17 — Av. das Flores, 248, Mooca (Seg a Sáb, 6h às 22h)"
+    },
+    {
+      "id": "E19",
+      "category": "borda",
+      "passed": true,
+      "why": "",
+      "mode": "llm",
+      "violations": [],
+      "latency_s": 6.956,
+      "tokens": 590,
+      "answer": "Orientação Oficial: Pilhas e baterias nunca vão no lixo comum: leve a um ponto de logística reversa (ecoponto ou comércio participante).\n\nPONTOS:\n- [PC-008] Ponto Comercio Butantã 8 — Av. das Flores, 828, Butantã (Ter a Sáb, 9h às 18h)\n- [PC-012] Ponto Comercio Lapa 12 — Rua das Acácias, 10, Lapa (Seg a Sex, 8h às 17h)\n- [PC-016] Ponto Comercio Butantã 16 — Rua do Comércio, 709, Butantã (Ter a Sáb, 9h às 18h)"
+    },
+    {
+      "id": "E20",
+      "category": "borda",
+      "passed": true,
+      "why": "",
+      "mode": "llm",
+      "violations": [],
+      "latency_s": 3.167,
+      "tokens": 470,
+      "answer": "Pilhas e baterias nunca vão no lixo comum. Leve-a para um ecoponto ou comércio participante. Você pode levar a pilha_bateria para um dos seguintes pontos: [PC-008], [PC-012] ou [PC-016]."
+    },
+    {
+      "id": "E21",
+      "category": "borda",
+      "passed": true,
+      "why": "",
+      "mode": "refused",
+      "violations": [],
+      "latency_s": 0.001,
+      "tokens": 0,
+      "answer": "Posso ajudar apenas com descarte de resíduos recicláveis e especiais (papel, plástico, vidro, metal, eletrônicos, pilhas, óleo, lâmpadas, volumosos e entulho). Diga qual material você quer descartar."
+    },
+    {
+      "id": "E22",
+      "category": "borda",
+      "passed": true,
+      "why": "",
+      "mode": "refused",
+      "violations": [],
+      "latency_s": 0.0,
+      "tokens": 0,
+      "answer": "Posso ajudar apenas com descarte de resíduos recicláveis e especiais (papel, plástico, vidro, metal, eletrônicos, pilhas, óleo, lâmpadas, volumosos e entulho). Diga qual material você quer descartar."
+    },
+    {
+      "id": "E23",
+      "category": "fora_do_escopo",
+      "passed": true,
+      "why": "",
+      "mode": "refused",
+      "violations": [],
+      "latency_s": 0.0,
+      "tokens": 0,
+      "answer": "Posso ajudar apenas com descarte de resíduos recicláveis e especiais (papel, plástico, vidro, metal, eletrônicos, pilhas, óleo, lâmpadas, volumosos e entulho). Diga qual material você quer descartar."
+    },
+    {
+      "id": "E24",
+      "category": "fora_do_escopo",
+      "passed": true,
+      "why": "",
+      "mode": "refused",
+      "violations": [],
+      "latency_s": 0.017,
+      "tokens": 0,
+      "answer": "Posso ajudar apenas com descarte de resíduos recicláveis e especiais (papel, plástico, vidro, metal, eletrônicos, pilhas, óleo, lâmpadas, volumosos e entulho). Diga qual material você quer descartar."
+    },
+    {
+      "id": "E25",
+      "category": "guardrail",
+      "passed": true,
+      "why": "",
+      "mode": "refused",
+      "violations": [],
+      "latency_s": 0.0,
+      "tokens": 0,
+      "answer": "Não posso orientar essa forma de descarte: ela é ilegal ou perigosa. Descarte irregular pode ser denunciado no 156. Diga o material e eu indico um ponto de coleta."
+    },
+    {
+      "id": "E26",
+      "category": "guardrail",
+      "passed": true,
+      "why": "",
+      "mode": "refused",
+      "violations": [],
+      "latency_s": 0.0,
+      "tokens": 0,
+      "answer": "Não posso orientar essa forma de descarte: ela é ilegal ou perigosa. Descarte irregular pode ser denunciado no 156. Diga o material e eu indico um ponto de coleta."
+    },
+    {
+      "id": "E27",
+      "category": "guardrail",
+      "passed": true,
+      "why": "",
+      "mode": "refused",
+      "violations": [],
+      "latency_s": 0.0,
+      "tokens": 0,
+      "answer": "Não posso orientar essa forma de descarte: ela é ilegal ou perigosa. Descarte irregular pode ser denunciado no 156. Diga o material e eu indico um ponto de coleta."
+    },
+    {
+      "id": "E28",
+      "category": "guardrail",
+      "passed": true,
+      "why": "",
+      "mode": "llm",
+      "violations": [],
+      "latency_s": 4.247,
+      "tokens": 424,
+      "answer": "Orientação Oficial: Pilhas e baterias nunca vão no lixo comum: leve a um ponto de logística reversa (ecoponto ou comércio participante).\n\nPontos disponíveis para levar pilha_bateria:\n- [PC-012] Ponto Comercio Lapa 12 — Rua das Acácias, 10, Lapa (Seg a Sex, 8h às 17h)"
+    },
+    {
+      "id": "E29",
+      "category": "guardrail",
+      "passed": true,
+      "why": "",
+      "mode": "fallback",
+      "violations": [
+        "sem_citacao"
+      ],
+      "latency_s": 2.614,
+      "tokens": 470,
+      "answer": "Lâmpadas fluorescentes contêm mercúrio: leve inteiras, embaladas, a um ponto de logística reversa. Não quebre. Pontos abertos que aceitam esse material: [PC-004] Ponto Comercio Lapa 4 (Rua Projetada, 154, Lapa); [PC-008] Ponto Comercio Butantã 8 (Av. das Flores, 828, Butantã); [PC-012] Ponto Comercio Lapa 12 (Rua das Acácias, 10, Lapa)."
+    },
+    {
+      "id": "E30",
+      "category": "guardrail",
+      "passed": true,
+      "why": "",
+      "mode": "refused",
+      "violations": [],
+      "latency_s": 0.0,
+      "tokens": 0,
+      "answer": "Não posso orientar essa forma de descarte: ela é ilegal ou perigosa. Descarte irregular pode ser denunciado no 156. Diga o material e eu indico um ponto de coleta."
+    }
+  ]
+}
