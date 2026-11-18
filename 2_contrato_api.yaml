@@ -1,0 +1,382 @@
+openapi: 3.1.0
+info:
+  title: ReciclaJá API — Pontos de coleta e orientação de descarte
+  version: 1.0.0
+  summary: Serviço CitizenTech (Frente C — Descarte e sustentabilidade)
+  description: |
+    Contrato do serviço **ReciclaJá**, escrito antes do código (spec-driven).
+    O cidadão consulta pontos de coleta seletiva e pergunta, em linguagem natural,
+    como descartar um resíduo. A resposta do assistente é fundamentada **apenas**
+    nos pontos cadastrados e na base de orientação de descarte.
+
+    Regras do contrato:
+    - Todo erro usa o mesmo corpo (`Error`).
+    - `400` = requisição malformada (JSON inválido, parâmetro de path/query inválido).
+    - `422` = corpo bem formado, mas que viola o schema (ex.: pergunta vazia).
+    - `404` = recurso inexistente.
+    - `503` = provedor de IA indisponível (o domínio continua respondendo `GET /points`).
+    - Listagens são paginadas por `limit`/`offset` e devolvem `next`.
+    - `POST /ask` não altera estado: é seguro repetir a mesma requisição (idempotente).
+  contact:
+    name: Grupo ReciclaJá — 2CCPY
+  license:
+    name: MIT
+    identifier: MIT
+servers:
+  - url: http://localhost:8000
+    description: Execução local (pytest / docker compose)
+tags:
+  - name: pontos
+    description: Pontos de coleta seletiva
+  - name: assistente
+    description: Orientação de descarte com IA
+  - name: operacao
+    description: Saúde do serviço
+paths:
+  /v1/points:
+    get:
+      tags: [pontos]
+      operationId: listPoints
+      summary: Lista pontos de coleta com filtros e paginação
+      parameters:
+        - name: material
+          in: query
+          required: false
+          description: Filtra pontos que aceitam o material
+          schema:
+            $ref: '#/components/schemas/Material'
+        - name: neighborhood
+          in: query
+          required: false
+          description: Filtra por bairro (comparação sem acento e sem caixa)
+          schema:
+            type: string
+            minLength: 2
+            maxLength: 60
+        - name: status
+          in: query
+          required: false
+          schema:
+            $ref: '#/components/schemas/PointStatus'
+        - name: limit
+          in: query
+          required: false
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 50
+            default: 10
+        - name: offset
+          in: query
+          required: false
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+      responses:
+        '200':
+          description: Página de pontos de coleta
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PointPage'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '503':
+          $ref: '#/components/responses/ServiceUnavailable'
+  /v1/points/{point_id}:
+    get:
+      tags: [pontos]
+      operationId: getPoint
+      summary: Detalha um ponto de coleta
+      parameters:
+        - name: point_id
+          in: path
+          required: true
+          description: Identificador no formato `PC-000`
+          schema:
+            type: string
+            pattern: '^PC-[0-9]{3}$'
+          example: PC-001
+      responses:
+        '200':
+          description: Ponto encontrado
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CollectionPoint'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '503':
+          $ref: '#/components/responses/ServiceUnavailable'
+  /v1/ask:
+    post:
+      tags: [assistente]
+      operationId: askDisposal
+      summary: Pergunta ao assistente como/onde descartar um resíduo
+      description: |
+        Fluxo: validação → mascaramento de dado pessoal → detecção de escopo →
+        busca de pontos (grounding) → LLM → guardrail de saída → resposta.
+
+        - Pergunta fora do escopo de descarte: `mode = refused` (o LLM nem é chamado).
+        - LLM cita ponto inexistente ou foge do material: `mode = fallback`
+          (resposta determinística montada pela base oficial).
+        - LLM indisponível ou estourou o tempo: `503`.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AskRequest'
+            examples:
+              pilha:
+                value:
+                  question: Onde jogo pilhas usadas perto da Mooca?
+                  neighborhood: Mooca
+      responses:
+        '200':
+          description: Resposta do assistente (respondida, recusada ou fallback)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AskResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '422':
+          $ref: '#/components/responses/UnprocessableEntity'
+        '503':
+          $ref: '#/components/responses/ServiceUnavailable'
+  /v1/health:
+    get:
+      tags: [operacao]
+      operationId: health
+      summary: Saúde do serviço e provedor de IA configurado
+      responses:
+        '200':
+          description: Serviço no ar
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Health'
+components:
+  schemas:
+    Material:
+      type: string
+      description: Categoria de resíduo aceita pela coleta
+      enum: [papel, plastico, vidro, metal, eletronico, pilha_bateria, oleo_cozinha, lampada, volumoso, entulho]
+    PointStatus:
+      type: string
+      description: Situação operacional do ponto
+      enum: [aberto, lotado, manutencao, fechado]
+    CollectionPoint:
+      type: object
+      additionalProperties: false
+      required: [id, name, type, neighborhood, address, latitude, longitude, materials, status, opening_hours, updated_at, data_source]
+      properties:
+        id:
+          type: string
+          pattern: '^PC-[0-9]{3}$'
+        name:
+          type: string
+        type:
+          type: string
+          enum: [ecoponto, pev, cooperativa, ponto_comercio]
+        neighborhood:
+          type: string
+        address:
+          type: string
+        latitude:
+          type: number
+          minimum: -90
+          maximum: 90
+        longitude:
+          type: number
+          minimum: -180
+          maximum: 180
+        materials:
+          type: array
+          minItems: 1
+          uniqueItems: true
+          items:
+            $ref: '#/components/schemas/Material'
+        status:
+          $ref: '#/components/schemas/PointStatus'
+        opening_hours:
+          type: string
+          example: Seg a Sáb, 6h às 22h
+        updated_at:
+          type: string
+          format: date-time
+        data_source:
+          type: string
+          enum: [sintetico, dados_abertos]
+          description: Origem do registro. Nesta versão todos os pontos são sintéticos.
+    PointPage:
+      type: object
+      additionalProperties: false
+      required: [items, total, limit, offset, next]
+      properties:
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/CollectionPoint'
+        total:
+          type: integer
+          minimum: 0
+        limit:
+          type: integer
+          minimum: 1
+        offset:
+          type: integer
+          minimum: 0
+        next:
+          type: [string, 'null']
+          description: URL relativa da próxima página ou `null` quando acabou
+    AskRequest:
+      type: object
+      additionalProperties: false
+      required: [question]
+      properties:
+        question:
+          type: string
+          minLength: 3
+          maxLength: 500
+          description: Pergunta do cidadão. Dados pessoais são mascarados antes de qualquer log ou envio ao LLM.
+        neighborhood:
+          type: [string, 'null']
+          minLength: 2
+          maxLength: 60
+          description: Bairro de referência para sugerir pontos próximos
+    AskResponse:
+      type: object
+      additionalProperties: false
+      required: [answer, mode, material, cited_points, refusal_reason, disclaimer, request_id]
+      properties:
+        answer:
+          type: string
+          description: Texto final entregue ao cidadão (já passou pelo guardrail de saída)
+        mode:
+          type: string
+          enum: [llm, fallback, refused]
+          description: |
+            `llm` = resposta do modelo aprovada pelo guardrail;
+            `fallback` = modelo reprovado no guardrail, resposta determinística;
+            `refused` = pergunta fora do escopo ou insegura.
+        material:
+          oneOf:
+            - $ref: '#/components/schemas/Material'
+            - type: 'null'
+        cited_points:
+          type: array
+          description: IDs de pontos citados — sempre existentes no cadastro
+          items:
+            type: string
+            pattern: '^PC-[0-9]{3}$'
+        refusal_reason:
+          type: [string, 'null']
+          enum: [fora_do_escopo, pergunta_insegura, null]
+        disclaimer:
+          type: string
+          description: Aviso fixo de que a orientação é automática e os dados são sintéticos
+        request_id:
+          type: string
+    Health:
+      type: object
+      additionalProperties: false
+      required: [status, llm_provider, llm_model, points_loaded]
+      properties:
+        status:
+          type: string
+          enum: [ok]
+        llm_provider:
+          type: string
+          enum: [fake, ollama, openai_compat]
+        llm_model:
+          type: string
+        points_loaded:
+          type: integer
+          minimum: 0
+    Error:
+      type: object
+      additionalProperties: false
+      required: [error]
+      properties:
+        error:
+          type: object
+          additionalProperties: false
+          required: [code, message, details, request_id]
+          properties:
+            code:
+              type: string
+              enum: [BAD_REQUEST, NOT_FOUND, VALIDATION_ERROR, LLM_UNAVAILABLE, INTERNAL_ERROR]
+            message:
+              type: string
+            details:
+              type: array
+              items:
+                type: object
+                additionalProperties: false
+                required: [field, issue]
+                properties:
+                  field:
+                    type: string
+                  issue:
+                    type: string
+            request_id:
+              type: string
+  responses:
+    BadRequest:
+      description: Requisição malformada (JSON inválido ou parâmetro de path/query inválido)
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            error:
+              code: BAD_REQUEST
+              message: Requisição malformada
+              details: [{field: path.point_id, issue: "String should match pattern '^PC-[0-9]{3}$'"}]
+              request_id: 7f1c2a
+    NotFound:
+      description: Recurso inexistente
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            error:
+              code: NOT_FOUND
+              message: Ponto de coleta PC-999 não encontrado
+              details: []
+              request_id: 7f1c2a
+    UnprocessableEntity:
+      description: Corpo bem formado que viola o schema
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            error:
+              code: VALIDATION_ERROR
+              message: Corpo da requisição inválido
+              details: [{field: body.question, issue: String should have at least 3 characters}]
+              request_id: 7f1c2a
+    ServiceUnavailable:
+      description: Dependência indisponível (provedor de IA ou fonte de dados)
+      headers:
+        Retry-After:
+          description: Segundos sugeridos antes de tentar novamente
+          schema:
+            type: integer
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            error:
+              code: LLM_UNAVAILABLE
+              message: Assistente temporariamente indisponível. Consulte GET /v1/points enquanto isso.
+              details: []
+              request_id: 7f1c2a
