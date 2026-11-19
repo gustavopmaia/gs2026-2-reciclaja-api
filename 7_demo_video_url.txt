@@ -1,4 +1,4 @@
 Vídeo de demonstração (≤ 3 min, YouTube não listado):
-<COLAR_LINK_DO_YOUTUBE_AQUI>
+https://youtu.be/bbq9Rvq8G6E
 
 Roteiro: docs/ROTEIRO_VIDEO.md
